@@ -25,8 +25,10 @@ public class Piece {
     public void possibleMoves() {
         System.out.println("Possible moves for " + name + " at (" + row + "," + col + ") with ID " + id + ":");
     }
-    
 
+
+    public void printPossibleMoves() {}
+    
     @Override
     public String toString() {
         // if (id == 0) return "."; // empty square

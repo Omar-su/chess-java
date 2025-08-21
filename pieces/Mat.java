@@ -18,7 +18,7 @@ public class Mat {
         mat[0][7] = new Piece(8,"White Rook",0,7);
 
         for (int j = 0; j < 8; j++) {
-            mat[1][j] = new Piece(17,"White Pawn",1,j);
+            mat[1][j] = new WhitePawn(17,"White Pawn",1,j);
         }
 
         // Empty squares

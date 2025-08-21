@@ -43,7 +43,7 @@ public class main {
             System.out.println("You entered: " + row + " " + col);
 
             Piece p = Mat.getPiece(row, col);
-            p.possibleMoves();
+            p.printPossibleMoves();
 
             System.out.println("To confirm the movement write con and to change the piece selection write cha");
 
