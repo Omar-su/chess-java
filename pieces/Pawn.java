@@ -1,0 +1,64 @@
+package pieces;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Pawn extends Piece implements Move {
+    private final boolean isBlack; // true = black, false = white
+
+    Pawn(int id, String name, int row, int col, boolean isBlack) {
+        super(id, name, row, col);
+        this.isBlack = isBlack;
+    }
+
+    @Override
+    public void move() {
+        // actual board update would go here
+    }
+
+    @Override
+    public void printPossibleMoves() {
+        List<int[]> moves = getPossibleMoves();
+        System.out.println("Possible moves for " + name + " at (" + row + "," + col + "):");
+        for (int[] m : moves) {
+            System.out.println("  -> Row: " + m[0] + ", Col: " + m[1]);
+        }
+    }
+
+    public List<int[]> getPossibleMoves() {
+        List<int[]> moves = new ArrayList<>();
+        int size = Mat.mat.length;
+
+        int dir = isBlack ? -1 : 1; // black moves up, white moves down
+        int startRow = isBlack ? 6 : 1;
+        String enemyPrefix = isBlack ? "White" : "Black";
+
+        // Forward move (1 square)
+        if (isInside(row + dir, col, size) && Mat.getPiece(row + dir, col).name.equals("Empty Place")) {
+            moves.add(new int[]{row + dir, col});
+        }
+
+        // Double move (if at starting row)
+        if (row == startRow 
+                && isInside(row + 2 * dir, col, size) 
+                && Mat.getPiece(row + dir, col).name.equals("Empty Place") 
+                && Mat.getPiece(row + 2 * dir, col).name.equals("Empty Place")) {
+            moves.add(new int[]{row + 2 * dir, col});
+        }
+
+        // Capture diagonals
+        if (isInside(row + dir, col + 1, size) && Mat.getPiece(row + dir, col + 1).name.startsWith(enemyPrefix)) {
+            moves.add(new int[]{row + dir, col + 1});
+        }
+        if (isInside(row + dir, col - 1, size) && Mat.getPiece(row + dir, col - 1).name.startsWith(enemyPrefix)) {
+            moves.add(new int[]{row + dir, col - 1});
+        }
+
+        return moves;
+    }
+
+    private boolean isInside(int r, int c, int size) {
+        return r >= 0 && r < size && c >= 0 && c < size;
+    }
+
+}
