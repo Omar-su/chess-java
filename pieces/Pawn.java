@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pawn extends Piece implements Move {
-    private final boolean isBlack; // true = black, false = white
 
-    Pawn(int id, String name, int row, int col, boolean isBlack) {
-        super(id, name, row, col);
-        this.isBlack = isBlack;
+    Pawn(int id, String name, int row, int col, Color color) {
+        super(id, name, row, col, color);
     }
 
     @Override
@@ -29,9 +27,19 @@ public class Pawn extends Piece implements Move {
         List<int[]> moves = new ArrayList<>();
         int size = Mat.mat.length;
 
-        int dir = isBlack ? -1 : 1; // black moves up, white moves down
-        int startRow = isBlack ? 6 : 1;
-        String enemyPrefix = isBlack ? "White" : "Black";
+        int dir = 0;
+        int startRow = 0;
+
+        if (this.color == Color.BLACK) {
+            dir = -1;
+            startRow = 6;
+        } else if (this.color == Color.WHITE) {
+            dir = 1;
+            startRow = 1;
+        }
+        // int dir = isBlack ? -1 : 1; // black moves up, white moves down
+        // int startRow = isBlack ? 6 : 1;
+        // String enemyPrefix = isBlack ? "White" : "Black";
 
         // Forward move (1 square)
         if (isInside(row + dir, col, size) && Mat.getPiece(row + dir, col).name.equals("Empty Place")) {
@@ -47,10 +55,10 @@ public class Pawn extends Piece implements Move {
         }
 
         // Capture diagonals
-        if (isInside(row + dir, col + 1, size) && Mat.getPiece(row + dir, col + 1).name.startsWith(enemyPrefix)) {
+        if (isInside(row + dir, col + 1, size) && Mat.getPiece(row + dir, col + 1).color != this.color) {
             moves.add(new int[]{row + dir, col + 1});
         }
-        if (isInside(row + dir, col - 1, size) && Mat.getPiece(row + dir, col - 1).name.startsWith(enemyPrefix)) {
+        if (isInside(row + dir, col - 1, size) && Mat.getPiece(row + dir, col - 1).color != this.color) {
             moves.add(new int[]{row + dir, col - 1});
         }
 

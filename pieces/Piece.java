@@ -1,17 +1,20 @@
 package pieces;
 
+
 public class Piece {
 
     int id;
     String name;
     int row;
     int col;
+    Color color;
 
-    Piece(int id, String name, int row, int col) {
+    Piece(int id, String name, int row, int col, Color color) {
         this.id = id;
         this.name = name;
         this.row = row;
         this.col = col;
+        this.color = color;
     }
 
     public void moveTo(int newRow, int newCol) {
@@ -28,7 +31,7 @@ public class Piece {
 
 
     public void printPossibleMoves() {}
-    
+
     @Override
     public String toString() {
         // if (id == 0) return "."; // empty square
