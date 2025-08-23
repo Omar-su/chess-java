@@ -67,8 +67,7 @@ public class main {
 
 
 
-            // Close the scanner (good practice)
-
+ 
             // gameIsDone = true;
 
         }
