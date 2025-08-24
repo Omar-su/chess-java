@@ -11,7 +11,7 @@ public class Mat {
         mat[0][0] = new Rook(1,"White Rook",0,0, Color.WHITE);
         mat[0][1] = new Knight(2,"White Knight",0,1, Color.WHITE);
         mat[0][2] = new Bishop(3,"White Bishop",0,2, Color.WHITE);
-        mat[0][3] = new Piece(4,"White Queen",0,3, Color.WHITE);
+        mat[0][3] = new Queen(4,"White Queen",0,3, Color.WHITE);
         mat[0][4] = new King(5,"White King",0,4, Color.WHITE);
         mat[0][5] = new Bishop(6,"White Bishop",0,5, Color.WHITE);
         mat[0][6] = new Knight(7,"White Knight",0,6, Color.WHITE);
@@ -37,7 +37,7 @@ public class Mat {
         mat[7][0] = new Rook(9,"Black Rook",7,0, Color.BLACK);
         mat[7][1] = new Knight(10,"Black Knight",7,1, Color.BLACK);
         mat[7][2] = new Bishop(11,"Black Bishop",7,2, Color.BLACK);
-        mat[7][3] = new Piece(12,"Black Queen",7,3, Color.BLACK);
+        mat[7][3] = new Queen(12,"Black Queen",7,3, Color.BLACK);
         mat[7][4] = new King(13,"Black King",7,4, Color.BLACK);
         mat[7][5] = new Bishop(14,"Black Bishop",7,5, Color.BLACK);
         mat[7][6] = new Knight(15,"Black Knight",7,6, Color.BLACK);
