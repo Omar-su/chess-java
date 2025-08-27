@@ -64,5 +64,11 @@ public class Mat {
         return mat[row][col];
     }
 
+    public static void ChangePos(int row, int col, Piece newPos) {
+        mat[row][col] = newPos;
+        newPos.row = row;
+        newPos.col = col;
+    }
+
 
 }

@@ -59,7 +59,8 @@ public class main {
 
                 String input2 = scanner.next();
                 if (input2.toLowerCase().equals("yes")) {
-                    p.moveTo(newrow, newcol);
+                    Piece newPos = Mat.getPiece(newrow, newcol);
+                    p.moveTo(newrow, newcol, newPos);
                 }
 
             }

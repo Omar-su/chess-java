@@ -55,10 +55,10 @@ public class Pawn extends Piece implements Move {
         }
 
         // Capture diagonals
-        if (isInside(row + dir, col + 1, size) && Mat.getPiece(row + dir, col + 1).color != this.color) {
+        if (isInside(row + dir, col + 1, size) && Mat.getPiece(row + dir, col + 1).color != Color.NONE) {
             moves.add(new int[]{row + dir, col + 1});
         }
-        if (isInside(row + dir, col - 1, size) && Mat.getPiece(row + dir, col - 1).color != this.color) {
+        if (isInside(row + dir, col - 1, size) && Mat.getPiece(row + dir, col - 1).color != Color.NONE) {
             moves.add(new int[]{row + dir, col - 1});
         }
 
