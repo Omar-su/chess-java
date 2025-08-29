@@ -1,19 +1,18 @@
 package pieces;
 
-public class King extends Piece implements Move {
+import java.util.ArrayList;
+import java.util.List;
+
+public class King extends Piece {
+
+    List<IntPair> possibleMoves = new ArrayList<>();
 
     King(int id, String name, int row, int col, Color color) {
         super(id, name, row, col, color);
     }
 
     @Override
-    public void move() {
-        // TODO Auto-generated method stub
-    }
-
-        @Override
-    public void printPossibleMoves() {
-        System.out.println("Possible moves for " + name + " at (" + row + "," + col + "):");
+    public List<IntPair> getPossibleMoves() {
         int size = Mat.mat.length;
 
         // Knight moves: (row offset, col offset)
@@ -24,15 +23,27 @@ public class King extends Piece implements Move {
             {1, -1}, {0, -1}
         };
 
+        List<IntPair> ls = new ArrayList<>();
         for (int[] move : moves) {
             int newRow = row + move[0];
             int newCol = col + move[1];
 
             if (isInside(newRow, newCol, size) && (Mat.getPiece(newRow, newCol).color != this.color)) {
-                System.out.println("  -> Row: " + newRow + ", Col: " + newCol);
+                ls.add(new IntPair(newRow, newCol));
             }
         }
 
+        return ls;
+    }
+
+    @Override
+    public void printPossibleMoves() {
+        System.out.println("Possible moves for " + name + " at (" + row + "," + col + "):");
+
+        possibleMoves = getPossibleMoves();
+        for (var p : possibleMoves) {
+            System.out.println("  -> Row: " + p.getFirst() + ", Col: " + p.getSecond());
+        }
         //TODO When checkmated
 
     }

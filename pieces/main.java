@@ -59,16 +59,16 @@ public class main {
 
                 String input2 = scanner.next();
                 if (input2.toLowerCase().equals("yes")) {
-                    Piece newPos = Mat.getPiece(newrow, newcol);
-                    p.moveTo(newrow, newcol, newPos);
+                    if (isInside(newrow, newcol, Mat.mat.length)) {
+                        Piece newPos = Mat.getPiece(newrow, newcol);
+                        p.moveTo(newrow, newcol, newPos);
+                    }else {
+                        System.out.println("Invalid move");
+                    }
                 }
 
             }
 
-
-
-
- 
             // gameIsDone = true;
 
         }
@@ -76,4 +76,9 @@ public class main {
         scanner.close();
 
     }
+
+    public static boolean isInside(int r, int c, int size) {
+        return r >= 0 && r < size && c >= 0 && c < size;
+    }
+    
 }

@@ -1,18 +1,18 @@
 package pieces;
 
-public class Bishop extends Piece implements Move {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Bishop extends Piece {
+
+    List<IntPair> possibleMoves = new ArrayList<>();
 
     Bishop(int id, String name, int row, int col, Color color) {
         super(id, name, row, col, color);
     }
 
     @Override
-    public void move() {
-    }
-    
-    @Override
-    public void printPossibleMoves() {
-                System.out.println("Possible moves for " + name + " at (" + row + "," + col + "):");
+    public List<IntPair> getPossibleMoves() {
         int size = Mat.mat.length;
 
         // 4 directions: up, down, right, left
@@ -22,6 +22,9 @@ public class Bishop extends Piece implements Move {
             { -1, 1}, // up right
             { 1,-1}  // down left
         };
+
+        List<IntPair> ls = new ArrayList<>();
+        
 
         for (int[] dir : directions) {
             int r = row;
@@ -37,18 +40,33 @@ public class Bishop extends Piece implements Move {
 
                 if (target.color == Color.NONE) {
                     // Empty square
-                    System.out.println("  -> Row: " + r + ", Col: " + c);
+                    ls.add(new IntPair(r, c));
+                    // System.out.println("  -> Row: " + r + ", Col: " + c);
                 } else {
                     // Enemy piece (different color) can be captured
                     if (target.color != this.color) {
-                        System.out.println("  -> Row: " + r + ", Col: " + c + " (capture " + target.name + ")");
+                        // System.out.println("  -> Row: " + r + ", Col: " + c + " (capture " + target.name + ")");
+                        ls.add(new IntPair(r, c));
                     }
                     // Stop 
                     break;
                 }
             }
         }
+        return ls;
     }
+
+    @Override
+    public void printPossibleMoves() {
+        System.out.println("Possible moves for " + name + " at (" + row + "," + col + "):");
+
+        possibleMoves = getPossibleMoves();
+        for (var p : possibleMoves) {
+            System.out.println("  -> Row: " + p.getFirst() + ", Col: " + p.getSecond());
+        }
+
+    }
+    
     
     private boolean isInside(int r, int c, int size) {
         return r >= 0 && r < size && c >= 0 && c < size;

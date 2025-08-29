@@ -1,5 +1,6 @@
 package pieces;
 
+import java.util.List;
 
 public class Piece {
 
@@ -20,6 +21,11 @@ public class Piece {
     public void moveTo(int newRow, int newCol, Piece newPos) {
         // TODO make sure move is valid
         
+        if (!isInList(newRow, newCol, this)) {
+            System.out.println("Unfortunatly the move is invalid... try again!");
+            return;
+        }
+
         // Move the piece to a new position
         if (newPos.color == Color.NONE) {
             // if empty space then put empty space in position of piece
@@ -36,10 +42,22 @@ public class Piece {
         
     }
 
-    public void possibleMoves() {
-        System.out.println("Possible moves for " + name + " at (" + row + "," + col + ") with ID " + id + ":");
+    private boolean isInList(int r, int c, Piece p){
+        boolean b = false;
+        for (var pos : p.getPossibleMoves()) {
+            if (r == pos.getFirst() && c == pos.getSecond()) {
+                b = true;
+            }
+        }
+        return b;
     }
 
+    // public void possibleMoves() {
+    //     System.out.println("Possible moves for " + name + " at (" + row + "," + col + ") with ID " + id + ":");
+    // }
+    public List<IntPair> getPossibleMoves(){
+        return null;
+    }
 
     public void printPossibleMoves() {}
 
