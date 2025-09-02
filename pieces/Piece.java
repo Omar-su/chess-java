@@ -1,6 +1,7 @@
 package pieces;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Piece {
 
@@ -52,14 +53,40 @@ public class Piece {
         return b;
     }
 
-    // public void possibleMoves() {
-    //     System.out.println("Possible moves for " + name + " at (" + row + "," + col + ") with ID " + id + ":");
-    // }
+    protected boolean isInside(int r, int c, int size) {
+        return r >= 0 && r < size && c >= 0 && c < size;
+    }
+
     public List<IntPair> getPossibleMoves(){
         return null;
     }
 
-    public void printPossibleMoves() {}
+    public Optional<String> printPossibleMoves() {
+        List<IntPair> possibleMoves = getPossibleMoves();
+
+        if (possibleMoves.isEmpty()) {
+            return Optional.empty();
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Possible moves for ")
+        .append(name)
+        .append(" at (")
+        .append(row)
+        .append(",")
+        .append(col)
+        .append("):\n");
+
+        for (var p : possibleMoves) {
+            sb.append("  -> Row: ")
+            .append(p.getFirst())
+            .append(", Col: ")
+            .append(p.getSecond())
+            .append("\n");
+        }
+
+        return Optional.of(sb.toString());
+    }
 
     @Override
     public String toString() {

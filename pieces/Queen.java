@@ -58,20 +58,5 @@ public class Queen extends Piece {
     }
 
 
-    // Movement of Bishop and Rook
-    @Override
-    public void printPossibleMoves(){
-        System.out.println("Possible moves for " + name + " at (" + row + "," + col + "):");
 
-        possibleMoves = getPossibleMoves();
-        for (var p : possibleMoves) {
-            System.out.println("  -> Row: " + p.getFirst() + ", Col: " + p.getSecond());
-        }
-
-    }
-
-    private boolean isInside(int r, int c, int size) {
-        return r >= 0 && r < size && c >= 0 && c < size;
-    }
-    
 }

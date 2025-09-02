@@ -1,5 +1,6 @@
 package pieces;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class main {
@@ -43,7 +44,18 @@ public class main {
             System.out.println("You entered: " + row + " " + col);
 
             Piece p = Mat.getPiece(row, col);
-            p.printPossibleMoves();
+            if (p.color == Color.NONE) {
+                System.err.println("No piece to move there!!");
+                continue;
+            }
+            
+            Optional<String> pm = p.printPossibleMoves();
+            if (pm.isEmpty()) {
+                System.err.println("This peace is not able to move anywhere");
+                continue; 
+            }
+
+            System.out.println(pm.get());
 
             System.out.println("To confirm the movement write con and to change the piece selection write cha");
 
@@ -55,16 +67,12 @@ public class main {
                 int newrow = scanner.nextInt();
                 System.out.println("Enter the column:");
                 int newcol = scanner.nextInt();
-                System.out.println("Your new position is: row: " + newrow + ", col: " + newcol + ", right? answer yes or no");
 
-                String input2 = scanner.next();
-                if (input2.toLowerCase().equals("yes")) {
-                    if (isInside(newrow, newcol, Mat.mat.length)) {
-                        Piece newPos = Mat.getPiece(newrow, newcol);
-                        p.moveTo(newrow, newcol, newPos);
-                    }else {
-                        System.out.println("Invalid move");
-                    }
+                if (isInside(newrow, newcol, Mat.mat.length)) {
+                    Piece newPos = Mat.getPiece(newrow, newcol);
+                    p.moveTo(newrow, newcol, newPos);
+                }else {
+                    System.err.println("Invalid move");
                 }
 
             }

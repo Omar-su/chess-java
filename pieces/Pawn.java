@@ -12,18 +12,6 @@ public class Pawn extends Piece{
         super(id, name, row, col, color);
     }
 
-
-
-
-    @Override
-    public void printPossibleMoves() {
-        List<IntPair> moves = getPossibleMoves();
-        System.out.println("Possible moves for " + name + " at (" + row + "," + col + "):");
-        for (var m : moves) {
-            System.out.println("  -> Row: " + m.getFirst() + ", Col: " + m.getSecond());
-        }
-    }
-
     @Override
     public List<IntPair> getPossibleMoves() {
         List<IntPair> moves = new ArrayList<>();
@@ -47,7 +35,7 @@ public class Pawn extends Piece{
 
         // Double move (if at starting row)
         if (row == startRow 
-                && isInside(row + 2 * dir, col, size) 
+                && this.isInside(row + 2 * dir, col, size) 
                 && Mat.getPiece(row + dir, col).name.equals("Empty Place") 
                 && Mat.getPiece(row + 2 * dir, col).name.equals("Empty Place")) {
             moves.add(new IntPair(row + 2 * dir, col));
@@ -64,8 +52,6 @@ public class Pawn extends Piece{
         return moves;
     }
 
-    private boolean isInside(int r, int c, int size) {
-        return r >= 0 && r < size && c >= 0 && c < size;
-    }
+
 
 }
